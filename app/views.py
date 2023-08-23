@@ -1,7 +1,13 @@
 from django.shortcuts import render
+from . models import *
+
 
 def home(request):
- return render(request, 'app/home.html')
+ dels_of_the_day_products = Products.objects.all()
+ cosmetics_obj = Categories.objects.get(name='Cosmetics')
+ cosmetics = Products.objects.filter(categories=cosmetics_obj.id)
+ context = {'dels_of_the_day_products':dels_of_the_day_products,'cosmetics':cosmetics}
+ return render(request, 'app/home.html',context)
 
 def product_detail(request):
  return render(request, 'app/productdetail.html')
