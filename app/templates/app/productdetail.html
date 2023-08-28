@@ -5,13 +5,14 @@
 <div class="container my-5">
  <div class="row">
   <div class="col-sm-6 text-center align-self-center">
-   <img src="{% static 'app/images/product/1.jpg' %}" alt="" class="img-fluid img-thumbnail">
+   <img src="{{single_product.image.url}}" alt="" class="img-fluid img-thumbnail">
   </div>
   <div class="col-sm-5 offset-sm-1">
-   <h2>Product Title: Product 1</h2>
+   <h2>{{single_product.title}}</h2>
    <hr>
-   <p>Product Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, at. Dignissimos rerum incidunt temporibus laudantium. Rem, eveniet corporis. Itaque delectus quae nesciunt nemo, maiores minus deserunt vel. Vero, nulla quisquam!</p> <br>
-   <h4>Rs. 13999 <small class="fw-light text-decoration-line-through">15999</small></h4> <br>
+   <p>{{single_product.description}}</p> <br>
+   <p class="fw-bold" >From: {{single_product.brand}}</p>
+   <h4>${{single_product.discounted_price}} <small class="fw-light text-decoration-line-through">${{single_product.sale_price}}</small></h4> <br>
    <a href="{% url 'add-to-cart' %}" class="btn btn-primary shadow px-5 py-2">Add to Cart</a>
    <a href="{% url 'buy-now' %}" class="btn btn-danger shadow px-5 py-2 ms-4">Buy Now</a>
    <h5 class="mt-5">Available Offers</h5>

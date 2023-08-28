@@ -4,7 +4,19 @@
 {% block main-content %}
 <div class="container my-5">
  <div class="row">
-  <h3>Welcome Sonam</h3>
+
+    {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+      {{ message }}
+      </li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+
+  <h3>Welcome {{request.user.username}}</h3>
   <div class="col-sm-2 border-end">
    <ul class="list-unstyled">
     <li class="d-grid"><a href="{% url 'profile' %}" class="btn btn-primary">Profile</a></li>

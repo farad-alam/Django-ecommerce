@@ -7,25 +7,27 @@
   <div class="col-sm-6 offset-sm-3">
    <h3>Customer Registration</h3>
    <hr>
+     
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+      {{ message }}
+      </li>
+      {% endfor %}
+  </ul>
+  {% endif %}
 
    <form action="" method="post" novalidate class="shadow p-5">
+    {% csrf_token %}
     <div class="mb-3">
-     <label for="inputEmail4" class="form-label">Email</label>
-     <input type="email" class="form-control" id="inputEmail4">
-     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-    </div>
-    <div class="mb-3">
-     <label for="inputPassword1" class="form-label">Password</label>
-     <input type="password" class="form-control" id="inputPassword1">
-    </div>
-    <div class="mb-3">
-     <label for="inputPassword2" class="form-label">Confirm Password</label>
-     <input type="password" class="form-control" id="inputPassword2">
-    </div>
+      {{form.as_p}}
     <div class="text-end">
-     <button type="button" class="btn btn-danger">Submit</button>
+     <button type="submit" class="btn btn-danger">Submit</button>
     </div>
     <br>
+    
     <div class="text-center text-primary fw-bold"><small>Existing User ? <a href="{% url 'login' %}"
        class="text-danger">Login Now</a> </small></div>
     {% if form.non_field_errors %}
