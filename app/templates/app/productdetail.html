@@ -13,7 +13,7 @@
    <p>{{single_product.description}}</p> <br>
    <p class="fw-bold" >From: {{single_product.brand}}</p>
    <h4>${{single_product.discounted_price}} <small class="fw-light text-decoration-line-through">${{single_product.sale_price}}</small></h4> <br>
-   <a href="{% url 'add-to-cart' %}" class="btn btn-primary shadow px-5 py-2">Add to Cart</a>
+   <a href="{% url 'add-to-cart' single_product.id %}" class="btn btn-primary shadow px-5 py-2">Add to Cart</a>
    <a href="{% url 'buy-now' %}" class="btn btn-danger shadow px-5 py-2 ms-4">Buy Now</a>
    <h5 class="mt-5">Available Offers</h5>
    <ul>

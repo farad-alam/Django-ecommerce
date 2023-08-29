@@ -1,6 +1,6 @@
 from typing import Any
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Categories(models.Model):
@@ -31,4 +31,25 @@ class Products(models.Model):
 
     def __str__(self):
         return self.title
+    
+# Customer Details
+class Customer(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    address = models.CharField(max_length=500)
+    city = models.CharField(max_length=100)
+    distric = models.CharField(max_length=100)
+    zip_code = models.IntegerField(max_length=10)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+    
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Products, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
+    def __str__(self):
+        return self.product.title
     

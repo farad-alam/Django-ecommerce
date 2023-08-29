@@ -110,7 +110,7 @@
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Sonam
+                  {{request.user.username}}
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                   <li>
@@ -132,7 +132,7 @@
                 </ul>
               </li>
               <li class="nav-item mx-2">
-                <a href="{% url 'add-to-cart' %}" class="nav-link text-white"
+                <a href="{% url 'cart' %}" class="nav-link text-white"
                   ><span class="badge bg-danger">4</span> Cart
                 </a>
               </li>
