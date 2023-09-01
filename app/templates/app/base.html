@@ -133,7 +133,7 @@
               </li>
               <li class="nav-item mx-2">
                 <a href="{% url 'cart' %}" class="nav-link text-white"
-                  ><span class="badge bg-danger">4</span> Cart
+                  ><span class="badge bg-danger">{{total_product_count}}</span> Cart
                 </a>
               </li>
               
@@ -192,5 +192,43 @@
     <script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'app/js/all.min.js' %}"></script>
     <script src="{% static 'app/js/myscript.js' %}"></script>
+    <script>
+       function productIncrease(id,number) {
+        console.log(number)
+
+        var product_id = document.getElementById(id).value;
+        console.log("Hidden Input Value:", typeof(product_id));
+        console.log("Hidden Input Value:"+ parseInt(product_id));
+        
+        
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function(){
+          console.log('this is response')
+          const responseData = JSON.parse(xhr.response)
+          console.log(responseData)
+
+          increase_id = 'quantity'+id
+          var increase = document.getElementById(increase_id)
+          increase.innerText = responseData['product_quantity']
+          document.getElementById("amount").innerText = '$'+ responseData['total_ammount']     
+          document.getElementById("shiping").innerText = '$'+ responseData['shipping_charge']      
+          document.getElementById("total_payable").innerText = '$'+ parseFloat(responseData['total_payable'])    
+          //console.log(xhr.response['product_quantity'])
+          console.log(xhr.responseText)
+        };
+        
+        xhr.open("POST","/increase-cart/");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        const data = {
+          productId :  parseInt(product_id),
+          number : parseInt(number)
+        }
+         xhr.send(JSON.stringify(data));
+        // xhr.send(data);
+         ///xhr.send(JSON.stringify({ value: product_id }));
+         ///xhr.send(data);
+       }
+
+    </script>
   </body>
 </html>

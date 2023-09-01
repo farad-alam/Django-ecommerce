@@ -32,16 +32,17 @@
                 </p>
                 <div class="my-3">
                   <label for="quantity">Quantity:</label>
-                  <a class="minus-cart btn"
+                  <a onclick="productIncrease('{{product.product.id}}',1)" class="minus-cart btn"
                     ><i class="fas fa-minus-square fa-lg"></i
                   ></a>
-                  <span id="quantity">3</span>
-                  <a class="plus-cart btn"
+                  <span id="quantity{{product.product.id}}">{{product.quantity}}</span>
+                  <a  onclick="productIncrease('{{product.product.id}}',2)" class="plus-cart btn"
                     ><i class="fas fa-plus-square fa-lg"></i
                   ></a>
+                  <input type="hidden" class="hiddenValueforproduct" name="plus" id="{{product.product.id}}" value="{{product.product.id}}">
                 </div>
                 <div class="d-flex justify-content-between">
-                  <a href="#" class="btn btn-sm btn-secondary mr-3"
+                  <a href="{% url 'remove_item' product.id %}" class="btn btn-sm btn-secondary mr-3"
                     >Remove item
                   </a>
                   <p class="mb-0">
@@ -63,21 +64,21 @@
         <div class="card-body">
           <h3>The Total Amount of</h3>
           <ul class="list-group">
-            <li
+            <li 
               class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0"
             >
-              Amount<span>${{total_ammount}}</span>
+              Amount<span id="amount">${{total_ammount}}</span>
             </li>
-            <li
+            <li 
               class="list-group-item d-flex justify-content-between align-items-center px-0"
             >
-              Shipping<span>${{shipping_charge}}</span>
+              Shipping<span id="shiping">${{shipping_charge}}</span>
             </li>
             <li
               class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3"
             >
               <div><strong>Total</strong> <small>(including VAT)</small></div>
-              <span><strong>${{total_payable}}</strong></span>
+              <span class="fw-bold" id="total_payable"><strong>${{total_payable}}</strong></span>
             </li>
           </ul>
           <div class="d-grid">
